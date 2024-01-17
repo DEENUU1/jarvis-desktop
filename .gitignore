@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 .idea/
+jarvis/.next/
+jarvis/node_modules
+
 # dependencies
 /node_modules
 /.pnp
@@ -33,4 +36,4 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+jarvis/next-env.d.ts
