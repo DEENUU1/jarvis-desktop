@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <meta
-            http-equiv="Content-Security-Policy"
-            content="default-src 'self'; script-src 'self'"
-    />
-    <meta
-            http-equiv="X-Content-Security-Policy"
-            content="default-src 'self'; script-src 'self'"
-    />
-    <title>Jarvis</title>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
-<body>
-<h1>Hello world</h1>
-<p>👋</p>
-</body>
+    <body>
+        <h1>Hello World!</h1>
+
+        <button id="toggle-dark-mode">Toggle Dark Mode</button>
+
+        <script src="renderer.js"></script>
+    </body>
 </html>

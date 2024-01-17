@@ -1,4 +1,5 @@
 jarvis/node_modules
 jarvis/out
 ../.idea/
+.idea
 jarvis/package-lock.json
