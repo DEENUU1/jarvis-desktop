@@ -14,7 +14,7 @@ export default async function Sidebar() {
     const data = await getConversations();
     return (
     <Sheet>
-        <SheetTrigger><Button>Open</Button></SheetTrigger>
+        <SheetTrigger>Open</SheetTrigger>
         <SheetContent side="left">
             <SheetHeader>
                 <SheetTitle><Link href="/">Jarvis</Link></SheetTitle>

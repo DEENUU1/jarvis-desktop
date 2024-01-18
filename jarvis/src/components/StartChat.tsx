@@ -39,9 +39,7 @@ export default function NewChat() {
 
     return (
             <div>
-                <Button onClick={handleClick} isLoading={isLoading}>
-                    {isLoading ? 'Loading...' : 'Start Chat'}
-                </Button>
+                <Button onClick={handleClick} isLoading={isLoading}>{isLoading ? 'Loading...' : 'Start Chat'}</Button>
             </div>
     )
 }
