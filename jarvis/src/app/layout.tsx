@@ -18,11 +18,11 @@ export default function RootLayout({
         className={`${inter.className} bg-slate-50 dark:bg-[#0d1117]`}
     >
       <Provider>
-                <ThemeSwitcher/>
-                <Sidebar/>
-                <main>
-                  {children}
-                </main>
+        <ThemeSwitcher/>
+            <Sidebar/>
+            <main>
+              {children}
+            </main>
       </Provider>
     </body>
     </html>

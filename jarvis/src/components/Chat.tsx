@@ -1,5 +1,8 @@
 'use client'
 import {useState, useEffect} from "react";
+import {ScrollArea} from "@/components/ui/scroll-area"
+import {Button} from "@nextui-org/react";
+import {Input} from "@nextui-org/react";
 
 export default function Chat({sessionId}: { sessionId: string }) {
     const [messages, setMessages] = useState()
@@ -50,35 +53,63 @@ export default function Chat({sessionId}: { sessionId: string }) {
 
     return (
         <>
-            <div className="max-w-lg mx-auto my-8 p-4 border rounded-md shadow-lg">
-                {messages?.map((message: any, index: number) => (
-                    <div
-                        key={index}
-                        className={`mb-4 p-4 rounded-md`}
-                    >
-                        {message.type === 'system' ? (
-                            <p>{message.content}</p>
-                        ) : (
-                            <>
-                                <p className="font-bold">
-                                    {message.type === 'human' ? 'You:' : 'AI:'}
-                                </p>
-                                <p>{message.content}</p>
-                            </>
-                        )}
-                    </div>
-                ))}
 
-                <div>
-                    <form onSubmit={sendMessage}>
-                        <input
-                            type="text"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-md"
-                        />
-                        <button type="submit">Send</button>
-                    </form>
+            <div className="flex h-screen antialiased">
+                <div className="flex flex-col flex-auto h-full p-6">
+                    <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl h-full p-4">
+                        <div className="flex flex-col h-full overflow-x-auto mb-4">
+                            <div className="flex flex-col h-full">
+                                    {messages?.map((message: any, index: number) => (
+                                        <div key={index}>
+                                            {message.type === 'system' ? (
+                                                <p>{message.content}</p>
+                                            ) : (
+                                                <div className={`grid grid-cols-12 gap-y-2`}>
+                                                    {message.type === 'ai' ? (
+                                                        <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                                                            <div className="flex flex-row items-center">
+                                                                <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">AI</div>
+                                                                <div className="relative ml-3 text-sm bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
+                                                                    <div>{message.content}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="col-start-6 col-end-13 p-3 rounded-lg">
+                                                            <div className="flex items-center justify-start flex-row-reverse">
+                                                                <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">You</div>
+                                                                <div className="relative mr-3 text-sm  bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
+                                                                    <div>{message.content}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                            </div>
+                        </div>
+                        <form onSubmit={sendMessage}>
+                            <div className="flex flex-row items-center h-16 rounded-xl w-full px-4">
+                                <div className="flex-grow">
+                                    <div className="relative w-full">
+                                        <Input
+                                            type="text"
+                                            variant={"bordered"}
+                                            value={message}
+                                            onChange={(e) => setMessage(e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="ml-4">
+                                    <Button type="submit" color="primary" variant="bordered" isLoading={isLoading}>
+                                        {isLoading ? 'Sending' : 'Send'}
+                                    </Button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </>

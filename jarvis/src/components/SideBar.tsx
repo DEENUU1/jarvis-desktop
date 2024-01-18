@@ -22,7 +22,7 @@ export default async function Sidebar() {
             <div>
                 {data.session_ids.map((conversationId: string) => (
                     <Link href={`/${conversationId}`} key={conversationId}>
-                        {conversationId}
+                        <h2>{conversationId}</h2>
                     </Link>
                 ))}
             </div>
