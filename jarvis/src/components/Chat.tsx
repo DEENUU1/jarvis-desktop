@@ -1,11 +1,10 @@
 'use client'
 import {useState, useEffect} from "react";
-import {ScrollArea} from "@/components/ui/scroll-area"
 import {Button} from "@nextui-org/react";
 import {Input} from "@nextui-org/react";
 
 export default function Chat({sessionId}: { sessionId: string }) {
-    const [messages, setMessages] = useState()
+    const [messages, setMessages] = useState([])
     const [message, setMessage] = useState('')
     const [model, setModel] = useState('gpt-3.5-turbo-16k-0613')
     const [isLoading, setIsLoading] = useState(false)
@@ -53,7 +52,6 @@ export default function Chat({sessionId}: { sessionId: string }) {
 
     return (
         <>
-
             <div className="flex h-screen antialiased">
                 <div className="flex flex-col flex-auto h-full p-6">
                     <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl h-full p-4">
@@ -91,7 +89,7 @@ export default function Chat({sessionId}: { sessionId: string }) {
                             </div>
                         </div>
                         <form onSubmit={sendMessage}>
-                            <div className="flex flex-row items-center h-16 rounded-xl w-full px-4">
+                            <div className="flex flex-row items-center  rounded-xl w-full px-4">
                                 <div className="flex-grow">
                                     <div className="relative w-full">
                                         <Input

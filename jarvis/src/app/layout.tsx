@@ -17,7 +17,9 @@ export default function RootLayout({
         className={`${inter.className} bg-slate-50 dark:bg-[#0d1117]`}
     >
       <Provider>
-            <Sidebar/>
+              <nav className="fixed">
+                <Sidebar/>
+              </nav>
             <main>
               {children}
             </main>
