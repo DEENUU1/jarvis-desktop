@@ -10,10 +10,19 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.2.9",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "class-variance-authority": "^0.7.0",
+    "classnames": "^2.5.1",
+    "clsx": "^2.1.0",
+    "framer-motion": "^10.18.0",
+    "lucide-react": "^0.312.0",
     "next": "14.0.4",
     "next-themes": "^0.2.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",
