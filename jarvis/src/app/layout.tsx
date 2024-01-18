@@ -1,9 +1,8 @@
 import { Inter } from 'next/font/google'
-import {ThemeProvider} from "./ThemeProvier"
 import {ThemeSwitcher} from "@/app/ThemeSwitch";
 import "./globals.css";
-// import {NextUIProvider} from "@nextui-org/react";
 import Sidebar from "@/components/SideBar";
+import Provider from "./Provider";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,15 +17,13 @@ export default function RootLayout({
     <body
         className={`${inter.className} bg-slate-50 dark:bg-[#0d1117]`}
     >
-      {/*<NextUIProvider>*/}
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <ThemeSwitcher/>
-            <Sidebar/>
-            <main>
-              {children}
-            </main>
-        </ThemeProvider>
-      {/*</NextUIProvider>*/}
+      <Provider>
+                <ThemeSwitcher/>
+                <Sidebar/>
+                <main>
+                  {children}
+                </main>
+      </Provider>
     </body>
     </html>
   )
