@@ -6,7 +6,9 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import {getConversations} from "@/lib/conversation"
+import {getConversations} from "@/lib/chat"
+import Link from "next/link"
+
 
 export default async function Sidebar() {
     const data = await getConversations();
@@ -19,7 +21,9 @@ export default async function Sidebar() {
             </SheetHeader>
             <div>
                 {data.session_ids.map((conversationId: string) => (
-                    <div key={conversationId}>{conversationId}</div>
+                    <Link href={`/${conversationId}`} key={conversationId}>
+                        {conversationId}
+                    </Link>
                 ))}
             </div>
         </SheetContent>
