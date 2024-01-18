@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sheet"
 import {getConversations} from "@/lib/chat"
 import Link from "next/link"
+import {ThemeSwitcher} from "@/app/ThemeSwitch";
 
 
 export default async function Sidebar() {
@@ -19,6 +20,9 @@ export default async function Sidebar() {
             <SheetHeader>
                 <SheetTitle>Previous Chats</SheetTitle>
             </SheetHeader>
+            <div>
+                <ThemeSwitcher/>
+            </div>
             <div>
                 {data.session_ids.map((conversationId: string) => (
                     <Link href={`/${conversationId}`} key={conversationId}>
