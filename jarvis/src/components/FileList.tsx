@@ -27,10 +27,10 @@ export default async function Files(){
                     </thead>
                     <tbody>
                     {files && (
-                        files.map((file: any) => (
+                        files.map((file: any, index: number) => (
                             <tr key={file} className="border-b">
                                 <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-                                    1
+                                    {index + 1}
                                 </th>
                                 <td className="px-6 py-4">
                                     {file}

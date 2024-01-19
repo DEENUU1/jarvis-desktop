@@ -12,7 +12,7 @@ export default function FileDeleteButton({path}: {path: string}){
         setIsLoading(true);
 
         try{
-            const response = await fetch("http://16.171.185.186" + `/media/file/${path}`, {
+            const response = await fetch("http://16.171.185.186" + `/media/file/${path}/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
