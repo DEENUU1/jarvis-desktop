@@ -23,6 +23,9 @@ export default async function Sidebar() {
             <div>
                 <ThemeSwitcher/>
             </div>
+
+            <Link href={"/file/upload"}>Files</Link>
+
             <SheetHeader>
                 <SheetTitle>Previous Chats</SheetTitle>
             </SheetHeader>
