@@ -1,6 +1,6 @@
 import {getFileList} from "@/lib/file";
 import Link from "next/link";
-
+import FileDeleteButton from "@/components/FileDelete";
 
 export default async function Files(){
     const files = await getFileList()
@@ -20,6 +20,9 @@ export default async function Files(){
                         <th scope="col" className="px-6 py-3">
                             Path
                         </th>
+                        <th scope="col" className="px-6 py-3">
+                            Action
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,12 +35,15 @@ export default async function Files(){
                                 <td className="px-6 py-4">
                                     {file}
                                 </td>
+                                <td className="px-6 py-4">
+                                    <FileDeleteButton path={file}/>
+                                </td>
                             </tr>
                         ))
                     )}
                     </tbody>
                 </table>
-                ):(
+            ) : (
                 <div className="mt-5">
                     <p>No files found</p>
                 </div>

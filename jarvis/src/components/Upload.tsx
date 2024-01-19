@@ -12,24 +12,21 @@ export default function UploadFile(){
         setIsLoading(true)
 
         const formData = new FormData();
-
-
-        if (file !== null && typeof file !== "string") {
-            formData.append("uploaded_file", file);
-        }
+        formData.append("uploaded_file", file);
 
         try {
-            const response = await fetch("http://16.171.185.186" + "/media/upload", {
+            const response = await fetch("http://16.171.185.186" + "/media/upload/", {
                 method: "POST",
                 headers: {
                     accept: "application/json",
-                    "Content-Type": "multipart/form-data",
+                    // "Content-Type": "multipart/form-data",
                 },
                 body: formData,
             });
             if (response.ok) {
                 console.log("File uploaded successfully");
             } else {
+                console.log(response);
                 console.log("File upload failed");
             }
         } catch (error) {
@@ -53,7 +50,7 @@ export default function UploadFile(){
                             <path d="M6.707 8.707 11 4.414V17a1 1 0 0 0 2 0V4.414l4.293 4.293a1 1 0 0 0 1.414-1.414l-6-6a1 1 0 0 0-1.414 0l-6 6a1 1 0 0 0 1.414 1.414Z"/>
                         </svg>
                         <p className="font-semibold text-sm">Drag & Drop or <span>Choose file</span> to upload</p>
-                        <input type="file" id='uploadFile1' className="hidden"/>
+                        <input type="file" id='uploadFile1' className="hidden" onChange={(e) => setFile(e.target.files[0])}/>
                         <p className="text-xs text-gray-400 mt-2">.TXT, .PDF, .CSV, .JSON, .MD and .HTML are allowed</p>
                     </label>
                     <Button type="submit" color="primary" variant="bordered" className="sm:w-[560px] mx-auto" isLoading={isLoading}>{isLoading ? 'Uploading' : 'Upload'}</Button>
