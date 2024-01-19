@@ -1,4 +1,5 @@
 import {getFileList} from "@/lib/file";
+import Link from "next/link";
 
 
 export default async function Files(){
@@ -6,32 +7,41 @@ export default async function Files(){
 
     return (
         <>
-            <table className="w-full text-sm text-left rtl:text-right table-auto">
-                <thead className="text-xs">
-                <tr>
-                    <th scope="col" className="px-6 py-3">
-                        Id
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                        Path
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {files && (
-                    files.map((file: any) => (
-                        <tr key={file} className="border-b">
-                            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-                                1
-                            </th>
-                            <td className="px-6 py-4">
-                                {file}
-                            </td>
-                        </tr>
-                    ))
-                )}
-                </tbody>
-            </table>
+            <div className="mt-5">
+                <Link href="/file/upload">Upload new files</Link>
+            </div>
+            {files.length !== 0 ? (
+                <table className="w-full text-sm text-left rtl:text-right table-auto">
+                    <thead className="text-xs">
+                    <tr>
+                        <th scope="col" className="px-6 py-3">
+                            Id
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Path
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {files && (
+                        files.map((file: any) => (
+                            <tr key={file} className="border-b">
+                                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+                                    1
+                                </th>
+                                <td className="px-6 py-4">
+                                    {file}
+                                </td>
+                            </tr>
+                        ))
+                    )}
+                    </tbody>
+                </table>
+                ):(
+                <div className="mt-5">
+                    <p>No files found</p>
+                </div>
+            )}
         </>
     )
 }
