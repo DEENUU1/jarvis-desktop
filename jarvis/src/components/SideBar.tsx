@@ -24,7 +24,10 @@ export default async function Sidebar() {
                 <ThemeSwitcher/>
             </div>
 
-            <Link href={"/file/upload"}>Files</Link>
+            <div className="gap-2 flex">
+                <Link href={"/file/upload"}>Upload file</Link>
+                <Link href={"/file"}>Files</Link>
+            </div>
 
             <SheetHeader>
                 <SheetTitle>Previous Chats</SheetTitle>
