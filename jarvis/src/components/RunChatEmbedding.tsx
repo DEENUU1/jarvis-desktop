@@ -4,7 +4,7 @@ import {Button} from "@nextui-org/react";
 import { useRouter } from 'next/navigation'
 
 
-export default function RunEmbeddingButton(){
+export default function RunChatEmbeddingButton(){
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
@@ -12,7 +12,7 @@ export default function RunEmbeddingButton(){
         setIsLoading(true);
 
         try {
-            const response = await fetch("http://16.171.185.186" + "/media/embedding/", {
+            const response = await fetch("http://16.171.185.186" + "/media/chat/", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export default function RunEmbeddingButton(){
     return (
         <>
             <div className="mt-5">
-                <Button onClick={handleRunEmbedding} isLoading={isLoading}>{isLoading ? 'Loading...' : 'Run embedding'}</Button>
+                <Button onClick={handleRunEmbedding} isLoading={isLoading}>{isLoading ? 'Loading...' : 'Sync Chats'}</Button>
             </div>
         </>
     )

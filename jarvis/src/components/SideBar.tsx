@@ -8,7 +8,6 @@ import {
 import {getConversations} from "@/lib/chat"
 import Link from "next/link"
 import {ThemeSwitcher} from "@/app/ThemeSwitch";
-import { Button } from "@/components/ui/button"
 
 export default async function Sidebar() {
     const data = await getConversations();
@@ -24,10 +23,7 @@ export default async function Sidebar() {
                 <ThemeSwitcher/>
             </div>
 
-            <div className="gap-2 flex">
-                <Link href={"/file/upload"}>Upload file</Link>
-                <Link href={"/file"}>Files</Link>
-            </div>
+            <Link href={"/file"}>Upload file</Link>
 
             <SheetHeader>
                 <SheetTitle>Previous Chats</SheetTitle>

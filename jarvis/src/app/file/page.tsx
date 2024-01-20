@@ -1,14 +1,17 @@
-import Files from "@/components/FileList";
-import RunEmbeddingButton from "@/components/RunEmbedding";
+import UploadFile from "@/components/Upload";
+import RunChatEmbeddingButton from "@/components/RunChatEmbedding";
+import RunNotionEmbeddingButton from "@/components/RunNotionEmbedding";
 
-
-export default async function FilesPage() {
+export default function FileUpload() {
     return (
         <>
-            <section className="min-h-screen flex justify-center">
+            <section className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <RunEmbeddingButton/>
-                    <Files/>
+                    <div className="flex gap-2 items-center justify-center mb-5">
+                        <RunChatEmbeddingButton/>
+                        <RunNotionEmbeddingButton/>
+                    </div>
+                    <UploadFile/>
                 </div>
             </section>
         </>

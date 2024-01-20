@@ -3,7 +3,9 @@ import {useState} from 'react'
 import {Button} from "@nextui-org/react";
 
 export default function UploadFile(){
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState(null);
+    const [fileCategory, setFileCategory] = useState("private");
+    // todo Add select to chose file category
     const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = async (e: any) => {
@@ -12,14 +14,14 @@ export default function UploadFile(){
         setIsLoading(true)
 
         const formData = new FormData();
+        // @ts-ignore
         formData.append("uploaded_file", file);
 
         try {
-            const response = await fetch("http://16.171.185.186" + "/media/upload/", {
+            const response = await fetch("http://16.171.185.186" + `/media/file?file_category=${fileCategory}`, {
                 method: "POST",
                 headers: {
                     accept: "application/json",
-                    // "Content-Type": "multipart/form-data",
                 },
                 body: formData,
             });
