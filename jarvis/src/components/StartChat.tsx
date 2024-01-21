@@ -25,6 +25,7 @@ export default function NewChat() {
             if (response.ok){
                 const data = await response.json();
                 setSessionId(data?.session_id);
+                router.push(`/${sessionId}`)
                 console.log("new chat created");
             } else {
                 console.log("cant create new chat")
@@ -32,8 +33,8 @@ export default function NewChat() {
         } catch (error) {
             console.log(error);
         } finally {
-            setIsLoading(false);
             router.push(`/${sessionId}`)
+            setIsLoading(false);
         }
     }
 
