@@ -4,11 +4,13 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
+    SheetDescription
 } from "@/components/ui/sheet"
 import {getConversations} from "@/lib/chat"
 import Link from "next/link"
-import {ThemeSwitcher} from "@/app/ThemeSwitch";
 import { ScrollArea } from "@/components/ui/scroll-area"
+import DropDownMenu from "@/components/Dropdown";
+
 
 export default async function Sidebar() {
     const data = await getConversations();
@@ -17,17 +19,13 @@ export default async function Sidebar() {
         <SheetTrigger>Open</SheetTrigger>
         <SheetContent side="left">
             <SheetHeader>
-                <SheetTitle><Link href="/">Jarvis</Link></SheetTitle>
+                <SheetTitle className="mb-5" ><Link href="/">Jarvis</Link></SheetTitle>
             </SheetHeader>
 
-            <div>
-                <ThemeSwitcher/>
-            </div>
+            <DropDownMenu/>
 
-            <Link href={"/file"}>Upload file</Link>
-
-
-            <ScrollArea className="h-[715px] w-[340px] mt-10">
+            <SheetDescription>
+            <ScrollArea className="h-[715px] w-[340px] mt-5">
                 {data.session_ids.reverse().map((conversationId: string) => (
                     <div>
                         <Link href={`/${conversationId}`} key={conversationId}>
@@ -36,6 +34,7 @@ export default async function Sidebar() {
                     </div>
                 ))}
             </ScrollArea>
+            </SheetDescription>
         </SheetContent>
     </Sheet>
     )
