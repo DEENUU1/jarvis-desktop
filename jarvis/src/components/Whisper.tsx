@@ -37,6 +37,7 @@ export default function Recorder({onTranscriptUpdate}: RecorderProps){
     };
 
     useEffect(() => {
+        // @ts-ignore
         onTranscriptUpdate(transcript.text);
     }, [transcript]);
 
