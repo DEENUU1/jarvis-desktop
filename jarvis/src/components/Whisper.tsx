@@ -1,6 +1,17 @@
-import { useWhisper } from '@chengsokdara/use-whisper'
+'use client'
 
-export default function Recorder(){
+import { useWhisper } from '@chengsokdara/use-whisper'
+import { GrMicrophone } from "react-icons/gr";
+import { HiMicrophone } from "react-icons/hi";
+import {Button} from "@nextui-org/react";
+import {useEffect} from "react";
+
+
+interface RecorderProps {
+    onTranscriptUpdate: (transcript: string) => void;
+}
+
+export default function Recorder({onTranscriptUpdate}: RecorderProps){
     const {
         recording,
         speaking,
@@ -17,13 +28,24 @@ export default function Recorder(){
         stopTimeout: 3000, // 3 seconds timeout, after 3 seconds of silence the audio will be sent
     })
 
+    const handleToggleRecording = () => {
+        if (recording) {
+            stopRecording();
+        } else {
+            startRecording();
+        }
+    };
+
+    useEffect(() => {
+        onTranscriptUpdate(transcript.text);
+    }, [transcript]);
+
+
     return (
-        <div>
-            <p>Recording: {recording ? 'Yes' : 'No'}</p>
-            <p>Transcribing: {transcribing}</p>
-            <p>Transcribed Text: {transcript.text}</p>
-            <button onClick={() => startRecording()}>Start</button>
-            <button onClick={() => stopRecording()}>Stop</button>
-        </div>
+        <>
+            <Button color="primary"  isIconOnly variant="bordered" onClick={handleToggleRecording}>
+                {recording ? <HiMicrophone/> : <GrMicrophone/>}
+            </Button>
+        </>
     )
 }

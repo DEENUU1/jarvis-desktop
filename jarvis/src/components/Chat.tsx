@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import {Button} from "@nextui-org/react";
 import {Input} from "@nextui-org/react";
 import Recorder from "@/components/Whisper";
+import Speech from "@/components/TextToSpeech";
 
 
 export default function Chat({sessionId}: { sessionId: string }) {
@@ -10,7 +11,6 @@ export default function Chat({sessionId}: { sessionId: string }) {
     const [message, setMessage] = useState('')
     const [model, setModel] = useState('gpt-3.5-turbo-16k-0613')
     const [isLoading, setIsLoading] = useState(false)
-
 
     const fetchChatHistory = async () => {
         const response = await fetch("http://16.171.185.186" + `/chat/${sessionId}`)
@@ -47,6 +47,10 @@ export default function Chat({sessionId}: { sessionId: string }) {
         }
     }
 
+
+    const updateTranscript = (newTranscript: string) => {
+        setMessage(newTranscript);
+    };
 
     useEffect(() => {
         fetchChatHistory();
@@ -92,6 +96,9 @@ export default function Chat({sessionId}: { sessionId: string }) {
                         </div>
                         <form onSubmit={sendMessage}>
                             <div className="flex flex-row items-center  rounded-xl w-full px-4">
+                                <div className="mr-4">
+                                    <Recorder onTranscriptUpdate={updateTranscript}/>
+                                </div>
                                 <div className="flex-grow">
                                     <div className="relative w-full">
                                         <Input
@@ -110,7 +117,7 @@ export default function Chat({sessionId}: { sessionId: string }) {
                             </div>
                         </form>
 
-                        <Recorder/>
+                    <Speech text={"jeden 2 trzy 4 pięć"}/>
                     </div>
                 </div>
             </div>
