@@ -2,6 +2,8 @@
 import {useState, useEffect} from "react";
 import {Button} from "@nextui-org/react";
 import {Input} from "@nextui-org/react";
+import Recorder from "@/components/Whisper";
+
 
 export default function Chat({sessionId}: { sessionId: string }) {
     const [messages, setMessages] = useState([])
@@ -107,6 +109,8 @@ export default function Chat({sessionId}: { sessionId: string }) {
                                 </div>
                             </div>
                         </form>
+
+                        <Recorder/>
                     </div>
                 </div>
             </div>
