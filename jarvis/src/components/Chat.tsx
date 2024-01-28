@@ -25,13 +25,13 @@ export default function Chat({sessionId}: { sessionId: string }) {
 
     const fetchChatHistory = async () => {
         try {
-            const response = await fetch("http://16.171.185.186" + `/chat/${sessionId}`);
+            const response = await fetch(process.env.API_URL + `/chat/${sessionId}`);
             const data = await response.json();
             setMessages(data);
 
 
             // Run Speech component with updated text
-            const speechComponent = new Speech({ text: getLastAiContent(data), autoRead: autoRead });
+            const speechComponent = new Speech({text: getLastAiContent(data), autoRead: autoRead});
             speechComponent.updateSpeech();
         } catch (error) {
             console.log(error);
@@ -44,7 +44,7 @@ export default function Chat({sessionId}: { sessionId: string }) {
         setIsLoading(true);
 
         try {
-            const response = await fetch("http://16.171.185.186" + `/chat/${sessionId}`, {
+            const response = await fetch(process.env.API_URL + `/chat/${sessionId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -95,9 +95,12 @@ export default function Chat({sessionId}: { sessionId: string }) {
                                                             <div
                                                                 className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">AI
                                                             </div>
+
                                                             <div
                                                                 className="relative ml-3 text-sm bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
-                                                                <div>{message.content}</div>
+                                                                <div className="whitespace-pre-wrap">
+                                                                    {message.content}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -110,7 +113,8 @@ export default function Chat({sessionId}: { sessionId: string }) {
                                                             </div>
                                                             <div
                                                                 className="relative mr-3 text-sm  bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
-                                                                <div>{message.content}</div>
+                                                                <div
+                                                                    className="whitespace-pre-wrap">{message.content}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -146,11 +150,11 @@ export default function Chat({sessionId}: { sessionId: string }) {
 
                         <div className="flex flex-row items-center rounded-xl w-full px-4 mt-5">
                             <div>
-                                {autoRead ?(
+                                {autoRead ? (
                                     <Switch defaultSelected onChange={() => setAutoRead(!autoRead)}>
                                         Auto read
                                     </Switch>
-                                ):(
+                                ) : (
                                     <Switch onChange={() => setAutoRead(!autoRead)}>
                                         Enable auto read
                                     </Switch>
