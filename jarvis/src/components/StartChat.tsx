@@ -14,7 +14,7 @@ export default function NewChat() {
         setIsLoading(true);
 
         try{
-            const response = await fetch("http://16.171.185.186" + "/chat", {
+            const response = await fetch(process.env.API_URL + "/chat", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
