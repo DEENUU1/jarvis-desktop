@@ -135,8 +135,7 @@ export default function Chat({sessionId}: { sessionId: string }) {
                 <div className="flex flex-col flex-auto h-full p-6">
                     <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl h-full p-4">
                         <div className="flex flex-col h-full overflow-x-auto mb-4">
-                        <ConversationRender messages={messages}/>
-
+                            <ConversationRender messages={messages}/>
                         </div>
                         <form onSubmit={sendMessage}>
                             <div className="flex flex-row items-center  rounded-xl w-full px-4">
@@ -173,10 +172,7 @@ export default function Chat({sessionId}: { sessionId: string }) {
                                     </Switch>
                                 )}
                             </div>
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
