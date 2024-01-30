@@ -7,6 +7,7 @@ import Speech from "@/components/TextToSpeech";
 import {Switch} from "@nextui-org/react";
 import Markdown from 'react-markdown'
 import gfm from 'remark-gfm';
+// @ts-ignore
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {FaRegCopy} from "react-icons/fa6";
 import {FaCopy} from "react-icons/fa";

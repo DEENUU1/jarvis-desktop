@@ -11,7 +11,7 @@ export default function NewChat() {
     const [sessionId, setSessionId] = useState<string>('');
     const router = useRouter();
 
-    const handleClick = async () => {
+    const handleConversationCreate = async () => {
         setIsLoading(true);
 
         try{
@@ -26,7 +26,6 @@ export default function NewChat() {
             if (response.ok){
                 const data = await response.json();
                 setSessionId(data?.session_id);
-                router.push(`/${sessionId}`)
                 toast.success("New chat created")
             } else {
                 toast.warning("Can't create new chat")
@@ -34,9 +33,14 @@ export default function NewChat() {
         } catch (error) {
             toast.error("Error while creating new chat. Please try again later.")
         } finally {
-            router.push(`/${sessionId}`)
             setIsLoading(false);
         }
+    }
+
+    const handleClick = async () => {
+
+        await handleConversationCreate();
+        router.push(`/chat/${sessionId}`);
     }
 
     return (

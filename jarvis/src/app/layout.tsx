@@ -20,9 +20,10 @@ export default function RootLayout({
     >
       <Provider>
           <Setup/>
-              <nav className="fixed">
-                <Sidebar/>
-              </nav>
+            <nav className="fixed">
+              <Sidebar/>
+            </nav>
+
             <main>
               {children}
             </main>
