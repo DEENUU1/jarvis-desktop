@@ -1,3 +1,5 @@
+'use client';
+
 import {
     Sheet,
     SheetContent,
@@ -11,10 +13,28 @@ import Link from "next/link"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import DropDownMenu from "@/components/Dropdown";
 import DeleteConversationButton from "@/components/DeleteConversation";
+import {useState, useEffect} from "react"
 
 
-export default async function Sidebar() {
-    const data = await getConversations();
+export default function Sidebar() {
+    const [conversations, setConversations] = useState([]);
+
+    const fetchConversations = async () => {
+        const data = await getConversations();
+        setConversations(data.session_ids.reverse());
+    };
+
+    useEffect(() => {
+        fetchConversations();
+    }, []);
+
+    const handleDeleteConversation = (deletedSessionId: string) => {
+        setConversations((prevConversations) => 
+            prevConversations.filter((sessionId) => sessionId !== deletedSessionId)
+        );
+    }
+
+    // const data = await getConversations();
     return (
     <Sheet>
         <SheetTrigger>Open</SheetTrigger>
@@ -27,12 +47,12 @@ export default async function Sidebar() {
 
             <SheetDescription>
             <ScrollArea className="h-[715px] w-[340px] mt-5">
-                {data.session_ids.reverse().map((conversationId: string) => (
+                {conversations?.map((conversationId: string) => (
                     <div className="flex">
                         <Link href={`/${conversationId}`} key={conversationId}>
                             <h2 className="mb-2 border-2  rounded-xl p-2 hover:bg-blue-100 border-gray-500">{conversationId}</h2>
                         </Link>
-                        <DeleteConversationButton sessionId={conversationId}/>
+                        <DeleteConversationButton sessionId={conversationId} onDelete={handleDeleteConversation}/>
                     </div>
                 ))}
             </ScrollArea>

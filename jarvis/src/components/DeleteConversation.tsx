@@ -2,18 +2,16 @@
 
 import {Button} from "@nextui-org/react";
 import {useState} from "react";
-import {useRouter} from "next/navigation";
 
 
-export default function DeleteConversationButton({sessionId}: {sessionId: string}) {
+export default function DeleteConversationButton({sessionId, onDelete}: {sessionId: string, onDelete: (sessionId: string) => void}) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const router = useRouter();
 
     const handleClick = async () => {
         setIsLoading(true);
 
         try{
-            const response = await fetch("http://16.171.185.186" + `/chat/${sessionId}`, {
+            const response = await fetch(process.env.API_URL + `/chat/${sessionId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,13 +21,13 @@ export default function DeleteConversationButton({sessionId}: {sessionId: string
 
             if (response.ok){
                 console.log("Conversation deleted");
+                onDelete(sessionId);
             } else {
                 console.log("Can't delete conversation")
             }
         } catch (error) {
             console.log(error);
         } finally {
-            router.refresh();
             setIsLoading(false);
         }
     }
