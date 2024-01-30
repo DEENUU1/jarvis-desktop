@@ -34,7 +34,6 @@ export default function Sidebar() {
         );
     }
 
-    // const data = await getConversations();
     return (
     <Sheet>
         <SheetTrigger>Open</SheetTrigger>

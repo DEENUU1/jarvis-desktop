@@ -4,6 +4,7 @@ import {Button} from "@nextui-org/react";
 import {useState} from "react";
 
 
+// @ts-ignore
 export default function DeleteConversationButton({sessionId, onDelete}: {sessionId: string, onDelete: (sessionId: string) => void}) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
