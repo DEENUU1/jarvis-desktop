@@ -2,7 +2,7 @@
 
 import {Button} from "@nextui-org/react";
 import {useState} from "react";
-import { useRouter } from 'next/navigation'
+import {useRouter} from 'next/navigation'
 import {toast} from "react-toastify";
 
 
@@ -14,7 +14,7 @@ export default function NewChat() {
     const handleConversationCreate = async () => {
         setIsLoading(true);
 
-        try{
+        try {
             const response = await fetch(process.env.API_URL + "/chat", {
                 method: 'POST',
                 headers: {
@@ -23,7 +23,7 @@ export default function NewChat() {
                 }
             });
 
-            if (response.ok){
+            if (response.ok) {
                 const data = await response.json();
                 setSessionId(data?.session_id);
                 toast.success("New chat created")
@@ -44,8 +44,8 @@ export default function NewChat() {
     }
 
     return (
-            <div>
-                <Button onClick={handleClick} isLoading={isLoading}>{isLoading ? 'Loading...' : 'Start Chat'}</Button>
-            </div>
+        <div>
+            <Button onClick={handleClick} isLoading={isLoading}>{isLoading ? 'Loading...' : 'Start Chat'}</Button>
+        </div>
     )
 }

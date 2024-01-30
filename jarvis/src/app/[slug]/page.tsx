@@ -9,7 +9,7 @@ export default function Conversation({params}: {params: PageParams}) {
 
     return (
         <>
-        <Chat sessionId={sessionId} />
+            <Chat sessionId={sessionId} />
         </>
     );
 }
