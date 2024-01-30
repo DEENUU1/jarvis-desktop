@@ -1,6 +1,6 @@
 import UploadFile from "@/components/Upload";
 import RunChatEmbeddingButton from "@/components/RunChatEmbedding";
-import RunNotionEmbeddingButton from "@/components/RunNotionEmbedding";
+import RunNotion from "@/components/RunNotion";
 
 export default function FileUpload() {
     return (
@@ -9,7 +9,7 @@ export default function FileUpload() {
                 <div className="text-center">
                     <div className="flex gap-2 items-center justify-center mb-5">
                         <RunChatEmbeddingButton/>
-                        <RunNotionEmbeddingButton/>
+                        <RunNotion/>
                     </div>
                     <UploadFile/>
                 </div>
