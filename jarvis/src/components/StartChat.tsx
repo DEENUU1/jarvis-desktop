@@ -3,6 +3,7 @@
 import {Button} from "@nextui-org/react";
 import {useState} from "react";
 import { useRouter } from 'next/navigation'
+import {toast} from "react-toastify";
 
 
 export default function NewChat() {
@@ -26,12 +27,12 @@ export default function NewChat() {
                 const data = await response.json();
                 setSessionId(data?.session_id);
                 router.push(`/${sessionId}`)
-                console.log("new chat created");
+                toast.success("New chat created")
             } else {
-                console.log("cant create new chat")
+                toast.warning("Can't create new chat")
             }
         } catch (error) {
-            console.log(error);
+            toast.error("Error while creating new chat. Please try again later.")
         } finally {
             router.push(`/${sessionId}`)
             setIsLoading(false);
