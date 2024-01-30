@@ -7,6 +7,9 @@ import Speech from "@/components/TextToSpeech";
 import {Switch} from "@nextui-org/react";
 import Markdown from 'react-markdown'
 import gfm from 'remark-gfm';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {FaRegCopy} from "react-icons/fa6";
+import {FaCopy} from "react-icons/fa";
 
 export default function Chat({sessionId}: { sessionId: string }) {
     const [messages, setMessages] = useState([])
@@ -14,6 +17,8 @@ export default function Chat({sessionId}: { sessionId: string }) {
     const [model, setModel] = useState('gpt-3.5-turbo-16k-0613')
     const [isLoading, setIsLoading] = useState(false)
     const [autoRead, setAutoRead] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
     function getLastAiContent(response: any): string | undefined {
         const aiContents = response
@@ -99,12 +104,24 @@ export default function Chat({sessionId}: { sessionId: string }) {
 
                                                             <div
                                                                 className="relative ml-3 text-sm bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
+                                                                <CopyToClipboard text={message.content}
+                                                                                 onCopy={() => setCopied(true)}>
+                                                                        <span
+                                                                            className="absolute top-0 right-0"
+                                                                            onMouseEnter={() => setIsHovered(true)}
+                                                                            onMouseLeave={() => setIsHovered(false)}
+                                                                            style={{cursor: isHovered ? 'pointer' : 'default'}}
+                                                                        >
+                                                                          {isHovered ? <FaCopy size="1.2rem"/> : <FaRegCopy size="1.2rem"/>}
+                                                                        </span>
+                                                                </CopyToClipboard>
+
                                                                 <div className="whitespace-pre-wrap">
                                                                     <Markdown
-                                                                        remarkPlugins={[gfm]}>{message.content}
-                                                                    </Markdown>
+                                                                        remarkPlugins={[gfm]}>{message.content}</Markdown>
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 ) : (
