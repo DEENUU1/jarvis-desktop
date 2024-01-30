@@ -33,6 +33,8 @@ Jarvis consists of 2 repositories:
 
 <img src="assets/tools.png" alt="jarvis" />
 
+https://github.com/DEENUU1/jarvis-desktop/assets/111304236/5f818508-4a94-471d-acba-893f0df5c3be
+
 ### System architecture
 <img src="assets/1.png" alt="architecture"/>
 
