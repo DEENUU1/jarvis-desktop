@@ -11,6 +11,58 @@ import {toast} from "react-toastify";
 import CopyButton from "@/components/Copy";
 
 
+function ConversationRender({messages}: {messages: any}) {
+    return (
+        <div className="flex flex-col h-full">
+            {messages?.map((message: any, index: number) => (
+                <div key={index}>
+                    {message.type === 'system' ? (
+                        <p>{message.content}</p>
+                    ) : (
+                        <div className={`grid grid-cols-12 gap-y-2`}>
+                            {message.type === 'ai' ? (
+                                <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                                    <div className="flex flex-row items-center">
+                                        <div
+                                            className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">AI
+                                        </div>
+
+                                        <div
+                                            className="relative ml-3 text-sm bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
+                                            <CopyButton text={message.content}/>
+                                            <div className="whitespace-pre-wrap">
+                                                <Markdown remarkPlugins={[gfm]}>{message.content}</Markdown>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="col-start-6 col-end-13 p-3 rounded-lg">
+                                    <div
+                                        className="flex items-center justify-start flex-row-reverse">
+                                        <div
+                                            className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">You
+                                        </div>
+                                        <div
+                                            className="relative mr-3 text-sm  bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
+                                            <div className="whitespace-pre-wrap">
+                                                <Markdown
+                                                    remarkPlugins={[gfm]}>{message.content}
+                                                </Markdown>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    )
+}
+
 export default function Chat({sessionId}: { sessionId: string }) {
     const [messages, setMessages] = useState([])
     const [message, setMessage] = useState('')
@@ -83,55 +135,8 @@ export default function Chat({sessionId}: { sessionId: string }) {
                 <div className="flex flex-col flex-auto h-full p-6">
                     <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl h-full p-4">
                         <div className="flex flex-col h-full overflow-x-auto mb-4">
-                            <div className="flex flex-col h-full">
-                                {messages?.map((message: any, index: number) => (
-                                    <div key={index}>
-                                        {message.type === 'system' ? (
-                                            <p>{message.content}</p>
-                                        ) : (
-                                            <div className={`grid grid-cols-12 gap-y-2`}>
-                                                {message.type === 'ai' ? (
-                                                    <div className="col-start-1 col-end-8 p-3 rounded-lg">
-                                                        <div className="flex flex-row items-center">
-                                                            <div
-                                                                className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">AI
-                                                            </div>
+                        <ConversationRender messages={messages}/>
 
-                                                            <div
-                                                                className="relative ml-3 text-sm bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
-
-                                                                <CopyButton text={message.content}/>
-
-                                                                <div className="whitespace-pre-wrap">
-                                                                    <Markdown remarkPlugins={[gfm]}>{message.content}</Markdown>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                ) : (
-                                                    <div className="col-start-6 col-end-13 p-3 rounded-lg">
-                                                        <div
-                                                            className="flex items-center justify-start flex-row-reverse">
-                                                            <div
-                                                                className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">You
-                                                            </div>
-                                                            <div
-                                                                className="relative mr-3 text-sm  bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
-                                                                <div className="whitespace-pre-wrap">
-                                                                    <Markdown
-                                                                        remarkPlugins={[gfm]}>{message.content}
-                                                                    </Markdown>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
                         </div>
                         <form onSubmit={sendMessage}>
                             <div className="flex flex-row items-center  rounded-xl w-full px-4">
