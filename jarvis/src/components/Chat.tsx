@@ -5,6 +5,8 @@ import {Input} from "@nextui-org/react";
 import Recorder from "@/components/Whisper";
 import Speech from "@/components/TextToSpeech";
 import {Switch} from "@nextui-org/react";
+import Markdown from 'react-markdown'
+import gfm from 'remark-gfm';
 
 export default function Chat({sessionId}: { sessionId: string }) {
     const [messages, setMessages] = useState([])
@@ -67,7 +69,6 @@ export default function Chat({sessionId}: { sessionId: string }) {
         }
     }
 
-
     const updateTranscript = (newTranscript: string) => {
         setMessage(newTranscript);
     };
@@ -99,7 +100,9 @@ export default function Chat({sessionId}: { sessionId: string }) {
                                                             <div
                                                                 className="relative ml-3 text-sm bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
                                                                 <div className="whitespace-pre-wrap">
-                                                                    {message.content}
+                                                                    <Markdown
+                                                                        remarkPlugins={[gfm]}>{message.content}
+                                                                    </Markdown>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -113,8 +116,11 @@ export default function Chat({sessionId}: { sessionId: string }) {
                                                             </div>
                                                             <div
                                                                 className="relative mr-3 text-sm  bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
-                                                                <div
-                                                                    className="whitespace-pre-wrap">{message.content}</div>
+                                                                <div className="whitespace-pre-wrap">
+                                                                    <Markdown
+                                                                        remarkPlugins={[gfm]}>{message.content}
+                                                                    </Markdown>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
