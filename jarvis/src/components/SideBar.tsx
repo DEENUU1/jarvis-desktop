@@ -47,7 +47,7 @@ export default function Sidebar() {
             <SheetDescription>
             <ScrollArea className="h-[715px] w-[340px] mt-5">
                 {conversations?.map((conversationId: string) => (
-                    <div className="flex">
+                    <div key={conversationId} className="flex">
                         <Link href={`/${conversationId}`} key={conversationId}>
                             <h2 className="mb-2 border-2  rounded-xl p-2 hover:bg-blue-100 border-gray-500">{conversationId}</h2>
                         </Link>
