@@ -14,10 +14,12 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import DropDownMenu from "@/components/Dropdown";
 import DeleteConversationButton from "@/components/DeleteConversation";
 import {useState, useEffect} from "react"
+import {Button} from "@nextui-org/react";
 
 
 export default function Sidebar() {
     const [conversations, setConversations] = useState([]);
+    const [isHover, setIsHover] = useState(false);
 
     const fetchConversations = async () => {
         const data = await getConversations();
@@ -36,7 +38,16 @@ export default function Sidebar() {
 
     return (
     <Sheet>
-        <SheetTrigger>Open</SheetTrigger>
+        <SheetTrigger className="mt-3 ml-3">
+            <span
+                className="bg-gray-100 text-black hover:bg-gray-300 rounded-xl font-medium dark:text-white text-sm px-5 py-2.5 dark:bg-gray-600 dark:hover:bg-gray-700"
+                onMouseEnter={() => setIsHover(true)}
+                onMouseLeave={() => setIsHover(false)}
+                style={{cursor: isHover ? 'pointer' : 'default'}}
+            >
+                Open
+            </span>
+        </SheetTrigger>
         <SheetContent side="left">
             <SheetHeader>
                 <SheetTitle className="mb-5" ><Link href="/">Jarvis</Link></SheetTitle>
