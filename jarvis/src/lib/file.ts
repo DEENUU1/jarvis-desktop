@@ -1,6 +1,4 @@
-
-
-export async function getFileList(){
+export async function getFileList() {
     const response = await fetch("http://16.171.185.186" + "/media/file", {
         method: "GET",
         headers: {
