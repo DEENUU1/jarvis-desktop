@@ -24,6 +24,9 @@
   </p>
 </div>
 
+## Articles
+- https://medium.com/@kacperwlodarczyk/jarvis-the-history-of-my-private-assistant-f802e09b2c96
+
 ## System Architecture
 
 Jarvis consists of 2 repositories:
