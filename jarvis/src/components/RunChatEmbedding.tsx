@@ -34,7 +34,8 @@ export default function RunChatEmbeddingButton() {
         <>
             <div className="mt-5">
                 <Button onClick={handleRunEmbedding}
-                        isLoading={isLoading}>{isLoading ? 'Loading...' : 'Sync Chats'}</Button>
+                        isLoading={isLoading}>{isLoading ? 'Loading...' : 'Sync Chats'}
+                </Button>
             </div>
         </>
     )

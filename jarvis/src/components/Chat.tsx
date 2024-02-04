@@ -11,7 +11,61 @@ import {toast} from "react-toastify";
 import CopyButton from "@/components/Copy";
 
 
-function ConversationRender({messages}: {messages: any}) {
+export function MarkdownMessage({message}: {message: any}){
+    return (
+        <>
+            <div className="whitespace-pre-wrap">
+                <Markdown remarkPlugins={[gfm]}>{message.content}</Markdown>
+            </div>
+        </>
+    )
+}
+
+
+export function MessageRender({type, message}: { type: string, message: any }) {
+    if (type === "ai") {
+        return (
+            <>
+                <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                    <div className="flex flex-row items-center">
+                        <div
+                            className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">AI
+                        </div>
+
+                        <div
+                            className="relative ml-3 text-sm bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
+                            <CopyButton text={message.content}/>
+                            <MarkdownMessage message={message}/>
+                        </div>
+
+                    </div>
+                </div>
+            </>
+        )
+    }
+    if (type === "human") {
+        return (
+            <>
+                <div className="col-start-6 col-end-13 p-3 rounded-lg">
+                    <div
+                        className="flex items-center justify-start flex-row-reverse">
+                        <div
+                            className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">You
+                        </div>
+                        <div
+                            className="relative mr-3 text-sm  bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
+                            <MarkdownMessage message={message}/>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
+    }
+
+}
+
+
+export function ConversationRender({messages}: { messages: any }) {
     return (
         <div className="flex flex-col h-full">
             {messages?.map((message: any, index: number) => (
@@ -21,39 +75,9 @@ function ConversationRender({messages}: {messages: any}) {
                     ) : (
                         <div className={`grid grid-cols-12 gap-y-2`}>
                             {message.type === 'ai' ? (
-                                <div className="col-start-1 col-end-8 p-3 rounded-lg">
-                                    <div className="flex flex-row items-center">
-                                        <div
-                                            className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">AI
-                                        </div>
-
-                                        <div
-                                            className="relative ml-3 text-sm bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
-                                            <CopyButton text={message.content}/>
-                                            <div className="whitespace-pre-wrap">
-                                                <Markdown remarkPlugins={[gfm]}>{message.content}</Markdown>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="col-start-6 col-end-13 p-3 rounded-lg">
-                                    <div
-                                        className="flex items-center justify-start flex-row-reverse">
-                                        <div
-                                            className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">You
-                                        </div>
-                                        <div
-                                            className="relative mr-3 text-sm  bg-gray-200 dark:bg-black py-2 px-4 shadow rounded-xl">
-                                            <div className="whitespace-pre-wrap">
-                                                <Markdown
-                                                    remarkPlugins={[gfm]}>{message.content}
-                                                </Markdown>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <MessageRender type="ai" message={message}/>
+                            ): (
+                                <MessageRender type="human" message={message}/>
                             )}
                         </div>
                     )}

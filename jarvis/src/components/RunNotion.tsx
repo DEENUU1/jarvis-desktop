@@ -60,11 +60,13 @@ export default function RunNotion(){
         <>
             <div className="mt-5">
                 <Button onClick={handleRunEmbedding}
-                        isLoading={isLoadingEmbedding}>{isLoadingEmbedding ? 'Loading...' : 'Notion Embedding'}</Button>
+                        isLoading={isLoadingEmbedding}>{isLoadingEmbedding ? 'Loading...' : 'Notion Embedding'}
+                </Button>
             </div>
             <div className="mt-5">
                 <Button onClick={handleRunLoading}
-                        isLoading={isLoading}>{isLoading ? 'Loading...' : 'Sync Notion'}</Button>
+                        isLoading={isLoading}>{isLoading ? 'Loading...' : 'Sync Notion'}
+                </Button>
             </div>
         </>
     )

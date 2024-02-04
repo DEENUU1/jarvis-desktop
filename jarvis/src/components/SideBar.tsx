@@ -57,7 +57,8 @@ export default function Sidebar() {
                 <SheetDescription>
                     <ScrollArea className="h-[715px] w-[340px] mt-5">
                         <Conversations conversations={conversations}
-                                       handleDeleteConversation={handleDeleteConversation}/>
+                                       handleDeleteConversation={handleDeleteConversation}
+                        />
                     </ScrollArea>
                 </SheetDescription>
             </SheetContent>
