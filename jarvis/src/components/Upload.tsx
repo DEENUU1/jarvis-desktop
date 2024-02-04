@@ -1,11 +1,11 @@
 'use client'
 import {useState} from 'react'
 import {Button} from "@nextui-org/react";
+import {toast} from "react-toastify";
 
 export default function UploadFile(){
     const [file, setFile] = useState(null);
     const [fileCategory, setFileCategory] = useState("private");
-    // todo Add select to chose file category
     const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = async (e: any) => {
@@ -18,7 +18,7 @@ export default function UploadFile(){
         formData.append("uploaded_file", file);
 
         try {
-            const response = await fetch("http://16.171.185.186" + `/media/file?file_category=${fileCategory}`, {
+            const response = await fetch(process.env.API_URL + `/media/file?file_category=${fileCategory}`, {
                 method: "POST",
                 headers: {
                     accept: "application/json",
@@ -26,13 +26,12 @@ export default function UploadFile(){
                 body: formData,
             });
             if (response.ok) {
-                console.log("File uploaded successfully");
+                toast.success("File uploaded successfully");
             } else {
-                console.log(response);
-                console.log("File upload failed");
+                toast.warning("Can't send file");
             }
         } catch (error) {
-            console.log(error)
+            toast.error("Error uploading file. Please try again later.");
         } finally {
             setIsLoading(false);
         }
